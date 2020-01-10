@@ -37,10 +37,16 @@ for submission in top_subreddit:
 
 topics_data = pd.DataFrame(topics_dict)
 
+import datetime
+basename = "File"
+suffix = datetime.datetime.now().strftime("%y%m%d_%H%M%S%f")
+extension = ".csv"
+filename = "_".join([basename, suffix, extension]) # e.g. 'file_120508_171442'
 
 def get_date(created):
     return dt.datetime.fromtimestamp(created)
-text8 = input('Enter FilePath with Filename  CSV format only:  ')
+
 _timestamp = topics_data["created"].apply(get_date)
 topics_data = topics_data.assign(timestamp = _timestamp)
-topics_data.to_csv(text8, index=False, encoding = 'utf-8') 
+topics_data.to_csv(filename, index=False, encoding = 'utf-8') 
+print('Data Pull Complete!!')
