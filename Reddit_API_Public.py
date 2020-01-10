@@ -2,12 +2,13 @@
 import praw
 import pandas as pd
 import datetime as dt
+import getpass
 
 text1 = input('Enter Reddit Client ID:  ')
-text2 = input('Enter Reddit Client Secret Key:  ')
+text2 = getpass.getpass('Enter Reddit Client Secret Key:  ')
 text3 = input('Enter Reddit User Agent:  ') 
 text4 = input('Enter Reddit Username:  ')
-text5 = input('Enter Reddit User Password:  ')
+text5 = getpass.getpass('Enter Reddit User Password:  ')
 reddit = praw.Reddit(client_id=text1, \
                      client_secret=text2, \
                      user_agent=text3, \
@@ -15,8 +16,8 @@ reddit = praw.Reddit(client_id=text1, \
                      password=text5)
 text6 = input('Enter Subreddit Name:  ')
 subreddit = reddit.subreddit(text6)
-text7 = input('Enter Subreddit Topic Limit (Integers only):  ')
-top_subreddit = subreddit.top(limit=text7)
+
+top_subreddit = subreddit.top(limit=200000) #edit the post limit in script as int
 
 topics_dict = { "title":[], \
                 "score":[], \
